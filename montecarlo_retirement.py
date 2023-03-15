@@ -3,14 +3,14 @@ import numpy as np
 
 # inputs
 
-yearly_investment = 105000
+yearly_investment = 106500
 years = 7
-interest_rate = 0.0845
-std_dev = 0.0760
+interest_rate = 0.04
+std_dev = 0.04
 initial_amount = 0
 
 # simulate multiple scenarios
-num_simulations = 20000
+num_simulations = 50000
 savings = np.zeros(num_simulations)
 for i in range(num_simulations):
     total_savings = initial_amount
@@ -24,7 +24,8 @@ for i in range(num_simulations):
     savings[i] = total_savings
 
 # calculate percentiles
-percentiles = np.percentile(savings, [5, 50, 90])
+percentiles = np.percentile(savings, [1, 25, 50, 80])
+average = (percentiles[0] + percentiles[1]+ percentiles[2]+percentiles[3]) / 4
 
 # print results
 print("Initial investment: $", initial_amount)
@@ -32,6 +33,8 @@ print("Yearly investment: $", yearly_investment)
 print("Years: ", years)
 print("Interest rate: {:.2f}%".format(interest_rate * 100))
 print("Standard deviation: {:.2f}%".format(std_dev * 100))
-print("5th percentile savings: ${:.2f}".format(percentiles[0]))
-print("50th percentile savings: ${:.2f}".format(percentiles[1]))
-print("90th percentile savings: ${:.2f}".format(percentiles[2]))
+print("1st percentile savings: ${:.2f}".format(percentiles[0]))
+print("25th percentile savings: ${:.2f}".format(percentiles[1]))
+print("50th percentile savings: ${:.2f}".format(percentiles[2]))
+print("90th percentile savings: ${:.2f}".format(percentiles[3]))
+print("Average:  ${:.2f}".format(average))
